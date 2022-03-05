@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+usage() {
+    cat <<EOF
+
+usage: ${0##*/} [app]
+
+  Apps:
+
+	--chrome	Chrome Browser
+	--discord	Discord Messaging app
+	--discord-canary	Canary version of discord
+	--atom		Atom IDE
+	--itch		An Amazing Game store for linux
+	--steam		Most Popular Game store for linux
+
+	cli-apps NillyTheL0L 2022-2022
+
+EOF
+}
+
+[[ -z $1 ]] && {
+    usage
+    exit 1
+}
+
+chrome(){
+
+cd ~/.local/share/ && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i google-chrome-stable_current_amd64.deb && rm -rf google-chrome-stable_current_amd64.deb && cd ~/ && echo app installed with sucess
+
+}
+
+discord(){
+
+cd ~/.local/share/ && wget https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.deb && sudo dpkg -i discord-0.0.17.deb && rm -rf discord-0.0.17.deb && cd ~/ && app installed with sucess
+
+}
+
+discord-canary(){
+
+cd ~/.local/share/ && wget https://dl-canary.discordapp.net/apps/linux/0.0.134/discord-canary-0.0.134.deb && sudo dpkg -i discord-canary-0.0.134.deb && rm -rf discord-canary-0.0.134.deb && cd ~/ && echo app installed with sucess
+
+}
+
+atom(){
+
+cd ~/.local/share/ && wget https://atom-installer.github.com/v1.59.0/atom-amd64.deb && sudo dpkg -i atom-amd64.deb && rm -rf atom-amd64.deb && cd ~/ && echo app installed with sucess
+
+}
+
+itch(){
+
+cd ~/.local/share/ && wget https://download1076.mediafire.com/ct2ajb0g7aug/v00l6b5oqra4c6h/itch-setup && chmod +x itch-setup && ./itch-setup  && cd ~/ && echo app installed with sucess
+
+}
+
+steam(){
+
+cd ~/.local/share/ && wget https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb && sudo dpkg -i steam.deb && rm -rf steam.deb && cd ~/ && echo app installed with sucess
+
+}
+
+
+
+
+cat <<EOF
+Cli-Apps --- Utility
+                                  NillyTheL0L - 2022-2022                
+EOF
+
+while [[ "$1" ]]; do
+    read -s -n 1 -p "Do you want to continue?[y/N]: "
+    [[ "$REPLY" == "y" ||  "$REPLY" == "Y" ]] && {
+         echo
+         case "$1" in
+            --chrome|-ch) chrome;;
+            --discord|-dc) discord;;
+            --discord-canary|-dcc) discord-canary;;
+            --atom|-at) discord-canary;;
+            --itch|-it) itch;;
+            --steam|-st) steam;;
+        esac
+        shift
+    } || {
+        printf "\nBye\n" "%s" && exit 0
+    }
+
+done
